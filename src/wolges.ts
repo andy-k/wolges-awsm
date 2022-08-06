@@ -38,6 +38,7 @@ for await (const conn of Deno.listen({ port: 4500 })) {
         "Content-Type": "application/json",
       },
     };
+    const pingResponseBody = JSON.stringify({ ok: true });
     for await (const reqEvt of Deno.serveHttp(conn)) {
       let responded = false;
       try {
@@ -47,7 +48,7 @@ for await (const conn of Deno.listen({ port: 4500 })) {
               case "/ping":
                 reqEvt.respondWith(
                   new Response(
-                    JSON.stringify({ ok: true }),
+                    pingResponseBody,
                     jsonResponseHeaders,
                   ),
                 );
