@@ -34,10 +34,26 @@ await Promise.all(
 for await (const conn of Deno.listen({ port: 4500 })) {
   (async () => {
     const resp404 = new Response("", { status: 404 });
+    const respHealthy = new Response(
+      JSON.stringify({ ok: true }),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
     for await (const reqEvt of Deno.serveHttp(conn)) {
       let responded = false;
       try {
         switch (reqEvt.request.method) {
+          case "GET":
+            switch ((new URL(reqEvt.request.url)).pathname) {
+              case "/ping":
+                reqEvt.respondWith(respHealthy);
+                responded = true;
+                break;
+            }
+            break;
           case "POST":
             switch ((new URL(reqEvt.request.url)).pathname) {
               case "/analyze":
