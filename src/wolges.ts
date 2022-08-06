@@ -34,13 +34,14 @@ await Promise.all(
 for await (const conn of Deno.listen({ port: 4500 })) {
   (async () => {
     const resp404 = new Response("", { status: 404 });
+    const jsonResponseHeaders = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     const respHealthy = new Response(
       JSON.stringify({ ok: true }),
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
+      jsonResponseHeaders,
     );
     for await (const reqEvt of Deno.serveHttp(conn)) {
       let responded = false;
@@ -60,11 +61,7 @@ for await (const conn of Deno.listen({ port: 4500 })) {
                 reqEvt.respondWith(
                   new Response(
                     await analyze(await reqEvt.request.text()),
-                    {
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                    },
+                    jsonResponseHeaders,
                   ),
                 );
                 responded = true;
@@ -73,11 +70,7 @@ for await (const conn of Deno.listen({ port: 4500 })) {
                 reqEvt.respondWith(
                   new Response(
                     await play_score(await reqEvt.request.text()),
-                    {
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                    },
+                    jsonResponseHeaders,
                   ),
                 );
                 responded = true;
