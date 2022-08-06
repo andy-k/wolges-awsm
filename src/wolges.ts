@@ -33,16 +33,11 @@ await Promise.all(
 
 for await (const conn of Deno.listen({ port: 4500 })) {
   (async () => {
-    const resp404 = new Response("", { status: 404 });
     const jsonResponseHeaders = {
       headers: {
         "Content-Type": "application/json",
       },
     };
-    const respHealthy = new Response(
-      JSON.stringify({ ok: true }),
-      jsonResponseHeaders,
-    );
     for await (const reqEvt of Deno.serveHttp(conn)) {
       let responded = false;
       try {
@@ -50,7 +45,12 @@ for await (const conn of Deno.listen({ port: 4500 })) {
           case "GET":
             switch ((new URL(reqEvt.request.url)).pathname) {
               case "/ping":
-                reqEvt.respondWith(respHealthy);
+                reqEvt.respondWith(
+                  new Response(
+                    JSON.stringify({ ok: true }),
+                    jsonResponseHeaders,
+                  ),
+                );
                 responded = true;
                 break;
             }
@@ -79,7 +79,7 @@ for await (const conn of Deno.listen({ port: 4500 })) {
             break;
         }
         if (!responded) {
-          reqEvt.respondWith(resp404);
+          reqEvt.respondWith(new Response("", { status: 404 }));
         }
       } catch (e) {
         reqEvt.respondWith(new Response(e.stack ?? e, { status: 500 }));
