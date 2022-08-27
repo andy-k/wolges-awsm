@@ -25,4 +25,4 @@ Clone liwords at the same level as this repo.
 
 ## GitHub Badge
 
-- [![Create and publish a Docker image](https://github.com/andy-k/wolges-awsm/actions/workflows/docker-image.yml/badge.svg)](https://github.com/andy-k/wolges-awsm/actions/workflows/docker-image.yml)
+- [![Actions](https://github.com/andy-k/wolges-awsm/actions/workflows/actions.yml/badge.svg)](https://github.com/andy-k/wolges-awsm/actions/workflows/actions.yml)
