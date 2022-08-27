@@ -18,7 +18,7 @@
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ],
   "lexicon": "CSW21",
-  "leave": "english",
+  "leave": "CSW21",
   "rules": "CrosswordGame",
   "plays": [{
     "action": "play",

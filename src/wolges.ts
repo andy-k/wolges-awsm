@@ -8,7 +8,7 @@ import init, {
 await init(Deno.readFile("pkg-web/wolges_wasm_bg.wasm"));
 await Promise.all(
   [
-    ...["english", "french", "german", "norwegian"].map(async (k) =>
+    ...["english", "CSW21", "french", "german", "norwegian"].map(async (k) =>
       precache_klv(k, await Deno.readFile(`data/${k}.klv`))
     ),
     ...[
