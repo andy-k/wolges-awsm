@@ -10,7 +10,7 @@ Wolges-awsm includes Wolges-wasm as a precompiled binary.
 
 ## License
 
-Copyright (C) 2020-2022 Andy Kurnia.\
+Copyright (C) 2020-2023 Andy Kurnia.\
 Released under the MIT license.
 
 ## Related Projects
