@@ -32,11 +32,11 @@ for await (const dirEntry of Deno.readDir("data")) {
           break;
         case "kad":
           cachePromises.push(
-            async () =>
+            (async () =>
               precache_kwg(
                 `${m[1]}.WordSmog`,
-                await Deno.readFile(`data/${dirEntry.name}`)(),
-              ),
+                await Deno.readFile(`data/${dirEntry.name}`),
+              ))(),
           );
           break;
       }
