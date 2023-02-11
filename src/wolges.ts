@@ -6,30 +6,44 @@ import init, {
 } from "../pkg-web/wolges_wasm.js";
 
 await init(Deno.readFile("pkg-web/wolges_wasm_bg.wasm"));
-await Promise.all(
-  [
-    ...["english", "CSW21", "french", "german", "norwegian"].map(async (k) =>
-      precache_klv(k, await Deno.readFile(`data/${k}.klv`))
-    ),
-    ...[
-      "CSW19",
-      "CSW19X",
-      "CSW21",
-      "NWL20",
-      "NWL18",
-      "NSWL20",
-      "ECWL",
-      "FRA20",
-      "RD28",
-      "NSF21",
-    ].map(async (k) =>
-      Promise.all([
-        precache_kwg(k, await Deno.readFile(`data/${k}.kwg`)),
-        precache_kwg(`${k}.WordSmog`, await Deno.readFile(`data/${k}.kad`)),
-      ])
-    ),
-  ],
-);
+const cachePromises = [];
+for await (const dirEntry of Deno.readDir("data")) {
+  if (dirEntry.isFile) {
+    const m = dirEntry.name.match(/^(.*)\.(klv|kwg|kad)$/);
+    if (m) {
+      switch (m[2]) {
+        case "klv":
+          cachePromises.push(
+            (async () =>
+              precache_klv(
+                m[1],
+                await Deno.readFile(`data/${dirEntry.name}`),
+              ))(),
+          );
+          break;
+        case "kwg":
+          cachePromises.push(
+            (async () =>
+              precache_kwg(
+                m[1],
+                await Deno.readFile(`data/${dirEntry.name}`),
+              ))(),
+          );
+          break;
+        case "kad":
+          cachePromises.push(
+            async () =>
+              precache_kwg(
+                `${m[1]}.WordSmog`,
+                await Deno.readFile(`data/${dirEntry.name}`)(),
+              ),
+          );
+          break;
+      }
+    }
+  }
+}
+await Promise.all(cachePromises);
 
 let runServer = true;
 while (runServer) {
