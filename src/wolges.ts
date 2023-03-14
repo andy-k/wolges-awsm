@@ -9,10 +9,10 @@ await init(Deno.readFile("pkg-web/wolges_wasm_bg.wasm"));
 const cachePromises = [];
 for await (const dirEntry of Deno.readDir("data")) {
   if (dirEntry.isFile) {
-    const m = dirEntry.name.match(/^(.*)\.(klv|kwg|kad)$/);
+    const m = dirEntry.name.match(/^(.*)\.(klv2|kwg|kad)$/);
     if (m) {
       switch (m[2]) {
-        case "klv":
+        case "klv2":
           cachePromises.push(
             (async () =>
               precache_klv(
