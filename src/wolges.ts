@@ -39,75 +39,35 @@ for await (const dirEntry of Deno.readDir("data")) {
 }
 await Promise.all(cachePromises);
 
-let runServer = true;
-while (runServer) {
+const jsonResponseHeaders = { headers: { "Content-Type": "application/json" } };
+const pingResponseBody = JSON.stringify({ ok: true });
+Deno.serve({ port: 4500 }, async (req) => {
   try {
-    runServer = false; // do not retry if port not available
-    const server = Deno.listen({ port: 4500 });
-    runServer = true;
-    for await (const conn of server) {
-      (async () => {
-        const jsonResponseHeaders = {
-          headers: { "Content-Type": "application/json" },
-        };
-        const pingResponseBody = JSON.stringify({ ok: true });
-        for await (const reqEvt of Deno.serveHttp(conn)) {
-          let responded = false;
-          try {
-            switch (reqEvt.request.method) {
-              case "GET":
-                switch ((new URL(reqEvt.request.url)).pathname) {
-                  case "/ping":
-                    await reqEvt.respondWith(
-                      new Response(pingResponseBody, jsonResponseHeaders),
-                    );
-                    responded = true;
-                    break;
-                }
-                break;
-              case "POST":
-                switch ((new URL(reqEvt.request.url)).pathname) {
-                  case "/analyze":
-                    await reqEvt.respondWith(
-                      new Response(
-                        await analyze(await reqEvt.request.text()),
-                        jsonResponseHeaders,
-                      ),
-                    );
-                    responded = true;
-                    break;
-                  case "/play-score":
-                    await reqEvt.respondWith(
-                      new Response(
-                        await play_score(await reqEvt.request.text()),
-                        jsonResponseHeaders,
-                      ),
-                    );
-                    responded = true;
-                    break;
-                }
-                break;
-            }
-            if (!responded) {
-              await reqEvt.respondWith(new Response("", { status: 404 }));
-            }
-          } catch (e) {
-            console.error(
-              new Date().toISOString(),
-              "inner error:",
-              e.stack,
-              e,
-              reqEvt.request,
-            );
-            await reqEvt.respondWith(
-              new Response(e.stack ?? e, { status: 500 }),
-            );
-          }
+    switch (req.method) {
+      case "GET":
+        switch ((new URL(req.url)).pathname) {
+          case "/ping":
+            return new Response(pingResponseBody, jsonResponseHeaders);
         }
-      })();
+        break;
+      case "POST":
+        switch ((new URL(req.url)).pathname) {
+          case "/analyze":
+            return new Response(
+              await analyze(await req.text()),
+              jsonResponseHeaders,
+            );
+          case "/play-score":
+            return new Response(
+              await play_score(await req.text()),
+              jsonResponseHeaders,
+            );
+        }
+        break;
     }
-    runServer = false; // when is this reached?
+    return new Response("", { status: 404 });
   } catch (e) {
-    console.error(new Date().toISOString(), "outer error:", e.stack, e);
+    console.error(new Date().toISOString(), "error:", e.stack, e, req);
+    return new Response(e.stack ?? e, { status: 500 });
   }
-}
+});
