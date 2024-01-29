@@ -13,31 +13,25 @@ for await (const dirEntry of Deno.readDir("data")) {
     if (m) {
       switch (m[2]) {
         case "klv2":
-          cachePromises.push(
-            (async () =>
-              precache_klv(
-                m[1],
-                await Deno.readFile(`data/${dirEntry.name}`),
-              ))(),
-          );
+          cachePromises.push((async () =>
+            precache_klv(
+              m[1],
+              await Deno.readFile(`data/${dirEntry.name}`),
+            ))());
           break;
         case "kwg":
-          cachePromises.push(
-            (async () =>
-              precache_kwg(
-                m[1],
-                await Deno.readFile(`data/${dirEntry.name}`),
-              ))(),
-          );
+          cachePromises.push((async () =>
+            precache_kwg(
+              m[1],
+              await Deno.readFile(`data/${dirEntry.name}`),
+            ))());
           break;
         case "kad":
-          cachePromises.push(
-            (async () =>
-              precache_kwg(
-                `${m[1]}.WordSmog`,
-                await Deno.readFile(`data/${dirEntry.name}`),
-              ))(),
-          );
+          cachePromises.push((async () =>
+            precache_kwg(
+              `${m[1]}.WordSmog`,
+              await Deno.readFile(`data/${dirEntry.name}`),
+            ))());
           break;
       }
     }
@@ -54,9 +48,7 @@ while (runServer) {
     for await (const conn of server) {
       (async () => {
         const jsonResponseHeaders = {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         };
         const pingResponseBody = JSON.stringify({ ok: true });
         for await (const reqEvt of Deno.serveHttp(conn)) {
@@ -67,10 +59,7 @@ while (runServer) {
                 switch ((new URL(reqEvt.request.url)).pathname) {
                   case "/ping":
                     await reqEvt.respondWith(
-                      new Response(
-                        pingResponseBody,
-                        jsonResponseHeaders,
-                      ),
+                      new Response(pingResponseBody, jsonResponseHeaders),
                     );
                     responded = true;
                     break;
