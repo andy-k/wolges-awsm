@@ -1,4 +1,4 @@
-from denoland/deno:1.41.0
+from denoland/deno:1.41.1
 workdir /app
 copy . ./
 run ["deno", "cache", "src/wolges.ts"]
