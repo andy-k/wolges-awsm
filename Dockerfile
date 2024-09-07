@@ -1,4 +1,4 @@
-from denoland/deno:1.46.1
+from denoland/deno:1.46.3
 workdir /app
 copy src src
 copy pkg-web pkg-web
