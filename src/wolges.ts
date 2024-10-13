@@ -5,7 +5,7 @@ import init, {
   precache_kwg,
 } from "../pkg-web/wolges_wasm.js";
 
-await init(Deno.readFile("pkg-web/wolges_wasm_bg.wasm"));
+await init();
 const cachePromises = [];
 for await (const dirEntry of Deno.readDir("data")) {
   if (dirEntry.isFile) {
