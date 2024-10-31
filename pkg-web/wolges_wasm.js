@@ -49,7 +49,7 @@ function makeMutClosure(arg0, arg1, dtor, f) {
     return real;
 }
 function __wbg_adapter_18(arg0, arg1, arg2) {
-    wasm.closure67_externref_shim(arg0, arg1, arg2);
+    wasm.closure66_externref_shim(arg0, arg1, arg2);
 }
 
 export function do_this_on_startup() {
@@ -198,7 +198,7 @@ function handleError(f, args) {
     }
 }
 function __wbg_adapter_40(arg0, arg1, arg2, arg3) {
-    wasm.closure122_externref_shim(arg0, arg1, arg2, arg3);
+    wasm.closure121_externref_shim(arg0, arg1, arg2, arg3);
 }
 
 async function __wbg_load(module, imports) {
@@ -344,8 +344,8 @@ function __wbg_get_imports() {
     imports.wbg.__wbindgen_throw = function(arg0, arg1) {
         throw new Error(getStringFromWasm0(arg0, arg1));
     };
-    imports.wbg.__wbindgen_closure_wrapper314 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 68, __wbg_adapter_18);
+    imports.wbg.__wbindgen_closure_wrapper313 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 67, __wbg_adapter_18);
         return ret;
     };
     imports.wbg.__wbindgen_init_externref_table = function() {
