@@ -66,7 +66,7 @@ Deno.serve({ port: 4500 }, async (req) => {
         break;
     }
     return new Response("", { status: 404 });
-  } catch (e) {
+  } catch (e: any) {
     console.error(new Date().toISOString(), "error:", e.stack, e, req);
     return new Response(e.stack ?? e, { status: 500 });
   }
