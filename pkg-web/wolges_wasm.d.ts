@@ -1,25 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export function do_this_on_startup(): void;
-/**
- * @param {string} key
- * @param {Uint8Array} value
- */
 export function precache_kwg(key: string, value: Uint8Array): void;
-/**
- * @param {string} key
- * @param {Uint8Array} value
- */
 export function precache_klv(key: string, value: Uint8Array): void;
-/**
- * @param {string} req_str
- * @returns {Promise<any>}
- */
 export function analyze(req_str: string): Promise<any>;
-/**
- * @param {string} req_str
- * @returns {any}
- */
 export function play_score(req_str: string): any;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
@@ -29,18 +13,18 @@ export interface InitOutput {
   readonly do_this_on_startup: () => void;
   readonly precache_kwg: (a: number, b: number, c: number, d: number) => void;
   readonly precache_klv: (a: number, b: number, c: number, d: number) => void;
-  readonly analyze: (a: number, b: number) => number;
-  readonly play_score: (a: number, b: number) => Array;
-  readonly __wbindgen_export_0: WebAssembly.Table;
-  readonly __wbindgen_export_1: WebAssembly.Table;
-  readonly closure66_externref_shim: (a: number, b: number, c: number) => void;
-  readonly __wbindgen_malloc: (a: number, b: number) => number;
-  readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
-  readonly __externref_table_dealloc: (a: number) => void;
-  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
+  readonly analyze: (a: number, b: number) => any;
+  readonly play_score: (a: number, b: number) => [number, number, number];
   readonly __wbindgen_exn_store: (a: number) => void;
   readonly __externref_table_alloc: () => number;
-  readonly closure121_externref_shim: (a: number, b: number, c: number, d: number) => void;
+  readonly __wbindgen_export_2: WebAssembly.Table;
+  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
+  readonly __wbindgen_malloc: (a: number, b: number) => number;
+  readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
+  readonly __wbindgen_export_6: WebAssembly.Table;
+  readonly __externref_table_dealloc: (a: number) => void;
+  readonly closure68_externref_shim: (a: number, b: number, c: any) => void;
+  readonly closure123_externref_shim: (a: number, b: number, c: any, d: any) => void;
   readonly __wbindgen_start: () => void;
 }
 
