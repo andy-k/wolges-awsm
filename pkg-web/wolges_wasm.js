@@ -198,11 +198,11 @@ export function play_score(req_str) {
 }
 
 function __wbg_adapter_18(arg0, arg1, arg2) {
-    wasm.closure68_externref_shim(arg0, arg1, arg2);
+    wasm.closure69_externref_shim(arg0, arg1, arg2);
 }
 
 function __wbg_adapter_40(arg0, arg1, arg2, arg3) {
-    wasm.closure123_externref_shim(arg0, arg1, arg2, arg3);
+    wasm.closure126_externref_shim(arg0, arg1, arg2, arg3);
 }
 
 async function __wbg_load(module, imports) {
@@ -335,8 +335,8 @@ function __wbg_get_imports() {
         const ret = false;
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper311 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 69, __wbg_adapter_18);
+    imports.wbg.__wbindgen_closure_wrapper317 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 70, __wbg_adapter_18);
         return ret;
     };
     imports.wbg.__wbindgen_init_externref_table = function() {
