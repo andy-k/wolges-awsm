@@ -1,6 +1,7 @@
 import init, {
   analyze,
   play_score,
+  precache_kbwg,
   precache_klv,
   precache_kwg,
 } from "../pkg-web/wolges_wasm.js";
@@ -9,7 +10,7 @@ await init();
 const cachePromises = [];
 for await (const dirEntry of Deno.readDir("data")) {
   if (dirEntry.isFile) {
-    const m = dirEntry.name.match(/^(.*)\.(klv2|kwg|kad)$/);
+    const m = dirEntry.name.match(/^(.*)\.(klv2|kwg|kbwg|kad)$/);
     if (m) {
       switch (m[2]) {
         case "klv2":
@@ -22,6 +23,13 @@ for await (const dirEntry of Deno.readDir("data")) {
         case "kwg":
           cachePromises.push((async () =>
             precache_kwg(
+              m[1],
+              await Deno.readFile(`data/${dirEntry.name}`),
+            ))());
+          break;
+        case "kbwg":
+          cachePromises.push((async () =>
+            precache_kbwg(
               m[1],
               await Deno.readFile(`data/${dirEntry.name}`),
             ))());
