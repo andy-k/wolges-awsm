@@ -159,6 +159,18 @@ export function precache_kwg(key, value) {
  * @param {string} key
  * @param {Uint8Array} value
  */
+export function precache_kbwg(key, value) {
+    const ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ptr1 = passArray8ToWasm0(value, wasm.__wbindgen_malloc);
+    const len1 = WASM_VECTOR_LEN;
+    wasm.precache_kbwg(ptr0, len0, ptr1, len1);
+}
+
+/**
+ * @param {string} key
+ * @param {Uint8Array} value
+ */
 export function precache_klv(key, value) {
     const ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
@@ -198,11 +210,11 @@ export function play_score(req_str) {
 }
 
 function __wbg_adapter_18(arg0, arg1, arg2) {
-    wasm.closure64_externref_shim(arg0, arg1, arg2);
+    wasm.closure68_externref_shim(arg0, arg1, arg2);
 }
 
-function __wbg_adapter_34(arg0, arg1, arg2, arg3) {
-    wasm.closure86_externref_shim(arg0, arg1, arg2, arg3);
+function __wbg_adapter_35(arg0, arg1, arg2, arg3) {
+    wasm.closure90_externref_shim(arg0, arg1, arg2, arg3);
 }
 
 async function __wbg_load(module, imports) {
@@ -265,7 +277,7 @@ function __wbg_get_imports() {
                 const a = state0.a;
                 state0.a = 0;
                 try {
-                    return __wbg_adapter_34(a, state0.b, arg0, arg1);
+                    return __wbg_adapter_35(a, state0.b, arg0, arg1);
                 } finally {
                     state0.a = a;
                 }
@@ -335,8 +347,8 @@ function __wbg_get_imports() {
         const ret = false;
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper296 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 65, __wbg_adapter_18);
+    imports.wbg.__wbindgen_closure_wrapper331 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 69, __wbg_adapter_18);
         return ret;
     };
     imports.wbg.__wbindgen_init_externref_table = function() {
