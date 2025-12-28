@@ -1,36 +1,43 @@
 /* tslint:disable */
 /* eslint-disable */
-export function do_this_on_startup(): void;
-export function precache_kwg(key: string, value: Uint8Array): void;
-export function precache_kbwg(key: string, value: Uint8Array): void;
-export function precache_klv(key: string, value: Uint8Array): void;
+
 export function analyze(req_str: string): Promise<any>;
+
+export function do_this_on_startup(): void;
+
 export function play_score(req_str: string): any;
+
+export function precache_kbwg(key: string, value: Uint8Array): void;
+
+export function precache_klv(key: string, value: Uint8Array): void;
+
+export function precache_kwg(key: string, value: Uint8Array): void;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly analyze: (a: number, b: number) => any;
   readonly do_this_on_startup: () => void;
-  readonly precache_kwg: (a: number, b: number, c: number, d: number) => void;
+  readonly play_score: (a: number, b: number) => [number, number, number];
   readonly precache_kbwg: (a: number, b: number, c: number, d: number) => void;
   readonly precache_klv: (a: number, b: number, c: number, d: number) => void;
-  readonly analyze: (a: number, b: number) => any;
-  readonly play_score: (a: number, b: number) => [number, number, number];
+  readonly precache_kwg: (a: number, b: number, c: number, d: number) => void;
+  readonly wasm_bindgen__convert__closures_____invoke__hf34d310f0e9001f7: (a: number, b: number, c: any) => void;
+  readonly wasm_bindgen__closure__destroy__hcec113300720d3a2: (a: number, b: number) => void;
+  readonly wasm_bindgen__convert__closures_____invoke__h1a3cd4484deb3064: (a: number, b: number, c: any, d: any) => void;
   readonly __wbindgen_exn_store: (a: number) => void;
   readonly __externref_table_alloc: () => number;
-  readonly __wbindgen_export_2: WebAssembly.Table;
+  readonly __wbindgen_externrefs: WebAssembly.Table;
   readonly __wbindgen_free: (a: number, b: number, c: number) => void;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
-  readonly __wbindgen_export_6: WebAssembly.Table;
   readonly __externref_table_dealloc: (a: number) => void;
-  readonly closure75_externref_shim: (a: number, b: number, c: any) => void;
-  readonly closure90_externref_shim: (a: number, b: number, c: any, d: any) => void;
   readonly __wbindgen_start: () => void;
 }
 
 export type SyncInitInput = BufferSource | WebAssembly.Module;
+
 /**
 * Instantiates the given `module`, which can either be bytes or
 * a precompiled `WebAssembly.Module`.
