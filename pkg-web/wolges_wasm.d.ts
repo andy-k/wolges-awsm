@@ -23,9 +23,9 @@ export interface InitOutput {
     readonly precache_kbwg: (a: number, b: number, c: number, d: number) => void;
     readonly precache_klv: (a: number, b: number, c: number, d: number) => void;
     readonly precache_kwg: (a: number, b: number, c: number, d: number) => void;
-    readonly wasm_bindgen__closure__destroy__h49d4fb282543aa92: (a: number, b: number) => void;
-    readonly wasm_bindgen__convert__closures_____invoke__h655a5550a5229c44: (a: number, b: number, c: any, d: any) => void;
-    readonly wasm_bindgen__convert__closures_____invoke__hc6f1bdea39a0096d: (a: number, b: number, c: any) => void;
+    readonly wasm_bindgen__closure__destroy__h25db458c4d0e3309: (a: number, b: number) => void;
+    readonly wasm_bindgen__convert__closures_____invoke__he0b373d0fdd18d32: (a: number, b: number, c: any) => [number, number];
+    readonly wasm_bindgen__convert__closures_____invoke__h051a05ff02a2f018: (a: number, b: number, c: any, d: any) => void;
     readonly __wbindgen_exn_store: (a: number) => void;
     readonly __externref_table_alloc: () => number;
     readonly __wbindgen_externrefs: WebAssembly.Table;
