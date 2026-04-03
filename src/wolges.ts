@@ -7,40 +7,21 @@ import init, {
 } from "../pkg-web/wolges_wasm.js";
 
 await init();
+const precachers: Record<string, (name: string, data: Uint8Array) => void> = {
+  klv2: precache_klv,
+  kwg: precache_kwg,
+  kbwg: precache_kbwg,
+  kad: (name, data) => precache_kwg(`${name}.WordSmog`, data),
+};
 const cachePromises = [];
 for await (const dirEntry of Deno.readDir("data")) {
   if (dirEntry.isFile) {
     const m = dirEntry.name.match(/^(.*)\.(klv2|kwg|kbwg|kad)$/);
     if (m) {
-      switch (m[2]) {
-        case "klv2":
-          cachePromises.push((async () =>
-            precache_klv(
-              m[1],
-              await Deno.readFile(`data/${dirEntry.name}`),
-            ))());
-          break;
-        case "kwg":
-          cachePromises.push((async () =>
-            precache_kwg(
-              m[1],
-              await Deno.readFile(`data/${dirEntry.name}`),
-            ))());
-          break;
-        case "kbwg":
-          cachePromises.push((async () =>
-            precache_kbwg(
-              m[1],
-              await Deno.readFile(`data/${dirEntry.name}`),
-            ))());
-          break;
-        case "kad":
-          cachePromises.push((async () =>
-            precache_kwg(
-              `${m[1]}.WordSmog`,
-              await Deno.readFile(`data/${dirEntry.name}`),
-            ))());
-          break;
+      const precacher = precachers[m[2]];
+      if (precacher) {
+        cachePromises.push((async () =>
+          precacher(m[1], await Deno.readFile(`data/${dirEntry.name}`)))());
       }
     }
   }
