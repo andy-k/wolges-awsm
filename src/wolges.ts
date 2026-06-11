@@ -20,8 +20,10 @@ for await (const dirEntry of Deno.readDir("data")) {
     if (m) {
       const precacher = precachers[m[2]];
       if (precacher) {
-        cachePromises.push((async () =>
-          precacher(m[1], await Deno.readFile(`data/${dirEntry.name}`)))());
+        cachePromises.push(
+          (async () =>
+            precacher(m[1], await Deno.readFile(`data/${dirEntry.name}`)))(),
+        );
       }
     }
   }
@@ -55,8 +57,9 @@ Deno.serve({ port: 4500 }, async (req) => {
         break;
     }
     return new Response("", { status: 404 });
-  } catch (e: any) {
-    console.error(new Date().toISOString(), "error:", e.stack, e, req);
-    return new Response(e.stack ?? e, { status: 500 });
+  } catch (e) {
+    const stack = e instanceof Error ? e.stack : undefined;
+    console.error(new Date().toISOString(), "error:", stack, e, req);
+    return new Response(stack ?? String(e), { status: 500 });
   }
 });
