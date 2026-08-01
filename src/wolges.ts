@@ -13,10 +13,10 @@ await init();
 //   lexicon "X.WordSmog" -> data/X.kad, cached under "X.WordSmog"
 //   lexicon "X"          -> data/X.kwg, else data/X.kbwg
 const WORDSMOG = ".WordSmog";
-function candidates(
+const candidates = (
   kind: "kwg" | "klv",
   name: string,
-): { file: string; load: (data: Uint8Array) => void }[] {
+): { file: string; load: (data: Uint8Array) => void }[] => {
   if (kind === "klv") {
     return [{ file: `${name}.klv2`, load: (d) => precache_klv(name, d) }];
   }
@@ -28,7 +28,7 @@ function candidates(
     { file: `${name}.kwg`, load: (d) => precache_kwg(name, d) },
     { file: `${name}.kbwg`, load: (d) => precache_kbwg(name, d) },
   ];
-}
+};
 
 // Names that have been settled, whether or not a file was found for them, so a
 // caller asking again for something that is not there costs one failed open
@@ -36,7 +36,10 @@ function candidates(
 const settled = new Set<string>();
 const inFlight = new Map<string, Promise<void>>();
 
-function ensure(kind: "kwg" | "klv", name: string): Promise<void> | undefined {
+const ensure = (
+  kind: "kwg" | "klv",
+  name: string,
+): Promise<void> | undefined => {
   const key = `${kind}:${name}`;
   if (settled.has(key)) return;
   const pending = inFlight.get(key);
@@ -73,10 +76,10 @@ function ensure(kind: "kwg" | "klv", name: string): Promise<void> | undefined {
   })().finally(() => inFlight.delete(key));
   inFlight.set(key, promise);
   return promise;
-}
+};
 
 // Awaited one after the other, so at most one file's bytes are ever live.
-async function ensureRequested(body: string) {
+const ensureRequested = async (body: string) => {
   let req;
   try {
     req = JSON.parse(body);
@@ -85,7 +88,7 @@ async function ensureRequested(body: string) {
   }
   if (typeof req?.lexicon === "string") await ensure("kwg", req.lexicon);
   if (typeof req?.leave === "string") await ensure("klv", req.leave);
-}
+};
 
 const jsonResponseHeaders = { headers: { "Content-Type": "application/json" } };
 const pingResponseBody = JSON.stringify({ ok: true });
