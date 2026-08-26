@@ -1,0 +1,22 @@
+name: Deno
+'on':
+  push:
+  pull_request:
+jobs:
+  check:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - uses: denoland/setup-deno@v2
+      with:
+        # the deno the Dockerfile runs the service on
+        deno-version: v2.9.4
+    - name: Deno version
+      run: deno --version
+    - name: Format
+      run: deno fmt --check
+    - name: Lint
+      run: deno lint
+    - name: Type-check
+      run: deno check src/wolges.ts
