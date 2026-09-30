@@ -18,7 +18,7 @@
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ],
   "lexicon": "NSF22.WordSmog",
-  "leave": "norwegian",
-  "rules": "WordSmog",
+  "leave": "NSF22",
+  "rules": "WordSmog/norwegian",
   "count": 15
 }
