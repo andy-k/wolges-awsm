@@ -9,7 +9,8 @@
   "tasks": {
     "serve": "deno run --allow-read=data,pkg-web --allow-net=0.0.0.0:4500 src/wolges.ts",
     "smoke": "deno run --allow-read=data,pkg-web,. src/wolges.ts analyze sample-analyze.json",
-    "check": "deno check src/wolges.ts",
+    "check": "deno check src/",
+    "test": "deno test --allow-read=data,pkg-web,. src/",
     "lint": "deno lint",
     "fmt": "deno fmt"
   }
