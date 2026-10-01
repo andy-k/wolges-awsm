@@ -3,12 +3,14 @@
 export const memory: WebAssembly.Memory;
 export const analyze: (a: number, b: number) => any;
 export const do_this_on_startup: () => void;
+export const evict_klv: (a: number, b: number) => number;
+export const evict_kwg: (a: number, b: number) => number;
 export const play_score: (a: number, b: number) => [number, number, number];
 export const precache_kbwg: (a: number, b: number, c: number, d: number) => void;
 export const precache_klv: (a: number, b: number, c: number, d: number) => void;
 export const precache_kwg: (a: number, b: number, c: number, d: number) => void;
-export const wasm_bindgen_d78c0224ab6f04bd___convert__closures_____invoke___wasm_bindgen_d78c0224ab6f04bd___JsValue__core_7d5f0a2ba6a62c33___result__Result_____wasm_bindgen_d78c0224ab6f04bd___JsError___true_: (a: number, b: number, c: any) => [number, number];
-export const wasm_bindgen_d78c0224ab6f04bd___convert__closures_____invoke___js_sys_d4e535d5e0f5af8c___Function_fn_wasm_bindgen_d78c0224ab6f04bd___JsValue_____wasm_bindgen_d78c0224ab6f04bd___sys__Undefined___js_sys_d4e535d5e0f5af8c___Function_fn_wasm_bindgen_d78c0224ab6f04bd___JsValue_____wasm_bindgen_d78c0224ab6f04bd___sys__Undefined_______true_: (a: number, b: number, c: any, d: any) => void;
+export const wasm_bindgen_75d65a54e06d1993___convert__closures_____invoke___js_sys_da92b032d3f0b6e4___Function_fn_wasm_bindgen_75d65a54e06d1993___JsValue_____wasm_bindgen_75d65a54e06d1993___sys__Undefined___js_sys_da92b032d3f0b6e4___Function_fn_wasm_bindgen_75d65a54e06d1993___JsValue_____wasm_bindgen_75d65a54e06d1993___sys__Undefined_______true_: (a: number, b: number, c: any, d: any) => void;
+export const wasm_bindgen_75d65a54e06d1993___convert__closures_____invoke___wasm_bindgen_75d65a54e06d1993___JsValue__core_ed718c3d60ebd546___result__Result_____wasm_bindgen_75d65a54e06d1993___JsError___true_: (a: number, b: number, c: any) => [number, number];
 export const __wbindgen_exn_store: (a: number) => void;
 export const __externref_table_alloc: () => number;
 export const __wbindgen_externrefs: WebAssembly.Table;
