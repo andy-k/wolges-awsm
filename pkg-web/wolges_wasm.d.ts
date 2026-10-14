@@ -29,8 +29,8 @@ export interface InitOutput {
     readonly precache_kbwg: (a: number, b: number, c: number, d: number) => [number, number];
     readonly precache_klv: (a: number, b: number, c: number, d: number) => [number, number];
     readonly precache_kwg: (a: number, b: number, c: number, d: number) => [number, number];
-    readonly wasm_bindgen_cf23390d2c5b3027___convert__closures_____invoke___js_sys_31559604d7c8b477___Function_fn_wasm_bindgen_cf23390d2c5b3027___JsValue_____wasm_bindgen_cf23390d2c5b3027___sys__Undefined___js_sys_31559604d7c8b477___Function_fn_wasm_bindgen_cf23390d2c5b3027___JsValue_____wasm_bindgen_cf23390d2c5b3027___sys__Undefined_______true_: (a: number, b: number, c: any, d: any) => void;
-    readonly wasm_bindgen_cf23390d2c5b3027___convert__closures_____invoke___wasm_bindgen_cf23390d2c5b3027___JsValue__core_608f92abc48d28da___result__Result_____wasm_bindgen_cf23390d2c5b3027___JsError___true_: (a: number, b: number, c: any) => [number, number];
+    readonly wasm_bindgen_16c492511d2994c___convert__closures_____invoke___js_sys_33cbe9311594f284___Function_fn_wasm_bindgen_16c492511d2994c___JsValue_____wasm_bindgen_16c492511d2994c___sys__Undefined___js_sys_33cbe9311594f284___Function_fn_wasm_bindgen_16c492511d2994c___JsValue_____wasm_bindgen_16c492511d2994c___sys__Undefined_______true_: (a: number, b: number, c: any, d: any) => void;
+    readonly wasm_bindgen_16c492511d2994c___convert__closures_____invoke___wasm_bindgen_16c492511d2994c___JsValue__core_608f92abc48d28da___result__Result_____wasm_bindgen_16c492511d2994c___JsError___true_: (a: number, b: number, c: any) => [number, number];
     readonly __wbindgen_exn_store: (a: number) => void;
     readonly __externref_table_alloc: () => number;
     readonly __wbindgen_externrefs: WebAssembly.Table;
