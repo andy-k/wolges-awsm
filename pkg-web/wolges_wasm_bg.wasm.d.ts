@@ -9,6 +9,7 @@ export const play_score: (a: number, b: number) => [number, number, number];
 export const precache_kbwg: (a: number, b: number, c: number, d: number) => [number, number];
 export const precache_klv: (a: number, b: number, c: number, d: number) => [number, number];
 export const precache_kwg: (a: number, b: number, c: number, d: number) => [number, number];
+export const version: () => [number, number];
 export const wasm_bindgen_44e7bf23456a2354___convert__closures_____invoke___js_sys_bd75a27dc57d2022___Function_fn_wasm_bindgen_44e7bf23456a2354___JsValue_____wasm_bindgen_44e7bf23456a2354___sys__Undefined___js_sys_bd75a27dc57d2022___Function_fn_wasm_bindgen_44e7bf23456a2354___JsValue_____wasm_bindgen_44e7bf23456a2354___sys__Undefined_______true_: (a: number, b: number, c: any, d: any) => void;
 export const wasm_bindgen_44e7bf23456a2354___convert__closures_____invoke___wasm_bindgen_44e7bf23456a2354___JsValue__core_37ee0ce0c4cd57d5___result__Result_____wasm_bindgen_44e7bf23456a2354___JsError___true_: (a: number, b: number, c: any) => [number, number];
 export const __wbindgen_exn_store: (a: number) => void;
