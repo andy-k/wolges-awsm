@@ -13,6 +13,14 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
+    # the image is stamped with the commit it is built from, as wolges's release
+    # names its files: <the commit's time in UTC>-<its short sha>
+    - name: Stamp the commit
+      id: stamp
+      run: >-
+        printf 'stamp=%s-%s\n'
+        "$(TZ=UTC0 git log -1 --format=%cd --date=format-local:%Y%m%dT%H%M%SZ)"
+        "$(git rev-parse --short HEAD)" >>"$GITHUB_OUTPUT"
     - name: Log in to the Container registry
       uses: docker/login-action@v4
       with:
@@ -34,3 +42,4 @@ jobs:
         push: true
         tags: "${{ steps.meta.outputs.tags }}"
         labels: "${{ steps.meta.outputs.labels }}"
+        build-args: "AWSM_VERSION=${{ steps.stamp.outputs.stamp }}"

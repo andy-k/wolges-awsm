@@ -1,4 +1,4 @@
-import init, { analyze, play_score } from "../pkg-web/wolges_wasm.js";
+import init, { analyze, play_score, version } from "../pkg-web/wolges_wasm.js";
 import { makeLexicons } from "./lexicons.ts";
 
 await init();
@@ -8,8 +8,20 @@ await init();
 const IDLE_MS = 10 * 60 * 1000;
 const lexicons = makeLexicons(IDLE_MS);
 
+// The commits this service was built from: its own, as its image's builder
+// stamps it (run.sh, or the workflow that publishes the image), "unknown"
+// outside an image; then the wasm's and wolges's, as version() reports them.
+const awsmVersion =
+  Deno.permissions.querySync({ name: "env", variable: "AWSM_VERSION" })
+      .state === "granted"
+    ? Deno.env.get("AWSM_VERSION") ?? "unknown"
+    : "unknown";
+
 const jsonResponseHeaders = { headers: { "Content-Type": "application/json" } };
 const pingResponseBody = JSON.stringify({ ok: true });
+const versionResponseBody = JSON.stringify({
+  version: `wolges-awsm ${awsmVersion} ${version()}`,
+});
 const handle = async (req: Request): Promise<Response> => {
   try {
     switch (req.method) {
@@ -17,6 +29,8 @@ const handle = async (req: Request): Promise<Response> => {
         switch ((new URL(req.url)).pathname) {
           case "/ping":
             return new Response(pingResponseBody, jsonResponseHeaders);
+          case "/version":
+            return new Response(versionResponseBody, jsonResponseHeaders);
         }
         break;
       case "POST": {
@@ -53,6 +67,7 @@ const handle = async (req: Request): Promise<Response> => {
 //   deno run --allow-read src/wolges.ts analyze sample-analyze.json
 //   deno run --allow-read src/wolges.ts play-score sample-play-score.json
 //   deno run --allow-read src/wolges.ts ping
+//   deno run --allow-read src/wolges.ts version
 //
 // The body may be "-" to read standard input. Exit status is 0 only for a 200,
 // so this is usable as a gate in a script.
