@@ -17,6 +17,8 @@ export function precache_klv(key: string, value: Uint8Array): void;
 
 export function precache_kwg(key: string, value: Uint8Array): void;
 
+export function version(): string;
+
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
@@ -29,6 +31,7 @@ export interface InitOutput {
     readonly precache_kbwg: (a: number, b: number, c: number, d: number) => [number, number];
     readonly precache_klv: (a: number, b: number, c: number, d: number) => [number, number];
     readonly precache_kwg: (a: number, b: number, c: number, d: number) => [number, number];
+    readonly version: () => [number, number];
     readonly wasm_bindgen_44e7bf23456a2354___convert__closures_____invoke___js_sys_bd75a27dc57d2022___Function_fn_wasm_bindgen_44e7bf23456a2354___JsValue_____wasm_bindgen_44e7bf23456a2354___sys__Undefined___js_sys_bd75a27dc57d2022___Function_fn_wasm_bindgen_44e7bf23456a2354___JsValue_____wasm_bindgen_44e7bf23456a2354___sys__Undefined_______true_: (a: number, b: number, c: any, d: any) => void;
     readonly wasm_bindgen_44e7bf23456a2354___convert__closures_____invoke___wasm_bindgen_44e7bf23456a2354___JsValue__core_37ee0ce0c4cd57d5___result__Result_____wasm_bindgen_44e7bf23456a2354___JsError___true_: (a: number, b: number, c: any) => [number, number];
     readonly __wbindgen_exn_store: (a: number) => void;
