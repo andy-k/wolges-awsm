@@ -11,11 +11,11 @@ export function evict_kwg(key: string): boolean;
 
 export function play_score(req_str: string): any;
 
-export function precache_kbwg(key: string, value: Uint8Array): void;
+export function precache_kbwg(key: string, value: Uint8Array | number[]): void;
 
-export function precache_klv(key: string, value: Uint8Array): void;
+export function precache_klv(key: string, value: Uint8Array | number[]): void;
 
-export function precache_kwg(key: string, value: Uint8Array): void;
+export function precache_kwg(key: string, value: Uint8Array | number[]): void;
 
 export function version(): string;
 
@@ -32,8 +32,8 @@ export interface InitOutput {
     readonly precache_klv: (a: number, b: number, c: number, d: number) => [number, number];
     readonly precache_kwg: (a: number, b: number, c: number, d: number) => [number, number];
     readonly version: () => [number, number];
-    readonly wasm_bindgen_44e7bf23456a2354___convert__closures_____invoke___js_sys_bd75a27dc57d2022___Function_fn_wasm_bindgen_44e7bf23456a2354___JsValue_____wasm_bindgen_44e7bf23456a2354___sys__Undefined___js_sys_bd75a27dc57d2022___Function_fn_wasm_bindgen_44e7bf23456a2354___JsValue_____wasm_bindgen_44e7bf23456a2354___sys__Undefined_______true_: (a: number, b: number, c: any, d: any) => void;
-    readonly wasm_bindgen_44e7bf23456a2354___convert__closures_____invoke___wasm_bindgen_44e7bf23456a2354___JsValue__core_37ee0ce0c4cd57d5___result__Result_____wasm_bindgen_44e7bf23456a2354___JsError___true_: (a: number, b: number, c: any) => [number, number];
+    readonly wasm_bindgen_c323763d69567808___convert__closures_____invoke___js_sys_9741b364472c89e7___Function_fn_wasm_bindgen_c323763d69567808___JsValue_____wasm_bindgen_c323763d69567808___sys__Undefined___js_sys_9741b364472c89e7___Function_fn_wasm_bindgen_c323763d69567808___JsValue_____wasm_bindgen_c323763d69567808___sys__Undefined_______true_: (a: number, b: number, c: any, d: any) => void;
+    readonly wasm_bindgen_c323763d69567808___convert__closures_____invoke___wasm_bindgen_c323763d69567808___JsValue__core_37ee0ce0c4cd57d5___result__Result_____wasm_bindgen_c323763d69567808___JsError___true_: (a: number, b: number, c: any) => [number, number];
     readonly __wbindgen_exn_store: (a: number) => void;
     readonly __externref_table_alloc: () => number;
     readonly __wbindgen_externrefs: WebAssembly.Table;
