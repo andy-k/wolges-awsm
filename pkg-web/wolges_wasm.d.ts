@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export function analyze(req_str: string): Promise<any>;
+export function analyze(req_str: string): string;
 
 export function do_this_on_startup(): void;
 
@@ -9,13 +9,31 @@ export function evict_klv(key: string): boolean;
 
 export function evict_kwg(key: string): boolean;
 
-export function play_score(req_str: string): any;
+export function hooks(req_str: string): string;
 
-export function precache_kbwg(key: string, value: Uint8Array | number[]): void;
+export function play_score(req_str: string): string;
 
-export function precache_klv(key: string, value: Uint8Array | number[]): void;
+export function precache_kblv2(key: string, value: Uint8Array): void;
 
-export function precache_kwg(key: string, value: Uint8Array | number[]): void;
+export function precache_kbwg(key: string, value: Uint8Array): void;
+
+export function precache_klv(key: string, value: Uint8Array): void;
+
+export function precache_kwg(key: string, value: Uint8Array): void;
+
+export function sim_add(sim: number, plays_str: string): string;
+
+export function sim_free(sim: number): void;
+
+export function sim_new(req_str: string): number;
+
+export function sim_pause(sim: number, plays_str: string): string;
+
+export function sim_remove(sim: number, plays_str: string): string;
+
+export function sim_resume(sim: number, plays_str: string): string;
+
+export function sim_step(sim: number, req_str: string): string;
 
 export function version(): string;
 
@@ -23,24 +41,30 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
     readonly memory: WebAssembly.Memory;
-    readonly analyze: (a: number, b: number) => any;
+    readonly analyze: (a: number, b: number) => [number, number, number, number];
     readonly do_this_on_startup: () => void;
-    readonly evict_klv: (a: number, b: number) => number;
-    readonly evict_kwg: (a: number, b: number) => number;
-    readonly play_score: (a: number, b: number) => [number, number, number];
-    readonly precache_kbwg: (a: number, b: number, c: number, d: number) => [number, number];
-    readonly precache_klv: (a: number, b: number, c: number, d: number) => [number, number];
-    readonly precache_kwg: (a: number, b: number, c: number, d: number) => [number, number];
+    readonly evict_klv: (a: number, b: number) => [number, number, number];
+    readonly evict_kwg: (a: number, b: number) => [number, number, number];
+    readonly hooks: (a: number, b: number) => [number, number, number, number];
+    readonly play_score: (a: number, b: number) => [number, number, number, number];
+    readonly precache_kblv2: (a: number, b: number, c: any) => [number, number];
+    readonly precache_kbwg: (a: number, b: number, c: any) => [number, number];
+    readonly precache_klv: (a: number, b: number, c: any) => [number, number];
+    readonly precache_kwg: (a: number, b: number, c: any) => [number, number];
+    readonly sim_add: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly sim_free: (a: number) => [number, number];
+    readonly sim_new: (a: number, b: number) => [number, number, number];
+    readonly sim_pause: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly sim_remove: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly sim_resume: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly sim_step: (a: number, b: number, c: number) => [number, number, number, number];
     readonly version: () => [number, number];
-    readonly wasm_bindgen_939c2e2f4e1d7475___convert__closures_____invoke___js_sys_f40063736ff5c153___Function_fn_wasm_bindgen_939c2e2f4e1d7475___JsValue_____wasm_bindgen_939c2e2f4e1d7475___sys__Undefined___js_sys_f40063736ff5c153___Function_fn_wasm_bindgen_939c2e2f4e1d7475___JsValue_____wasm_bindgen_939c2e2f4e1d7475___sys__Undefined_______true_: (a: number, b: number, c: any, d: any) => void;
-    readonly wasm_bindgen_939c2e2f4e1d7475___convert__closures_____invoke___wasm_bindgen_939c2e2f4e1d7475___JsValue__core_37ee0ce0c4cd57d5___result__Result_____wasm_bindgen_939c2e2f4e1d7475___JsError___true_: (a: number, b: number, c: any) => [number, number];
+    readonly __wbindgen_free: (a: number, b: number, c: number) => void;
     readonly __wbindgen_exn_store: (a: number) => void;
     readonly __externref_table_alloc: () => number;
     readonly __wbindgen_externrefs: WebAssembly.Table;
-    readonly __wbindgen_free: (a: number, b: number, c: number) => void;
     readonly __wbindgen_malloc: (a: number, b: number) => number;
     readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
-    readonly __wbindgen_destroy_closure: (a: number, b: number) => void;
     readonly __externref_table_dealloc: (a: number) => void;
     readonly __wbindgen_start: () => void;
 }

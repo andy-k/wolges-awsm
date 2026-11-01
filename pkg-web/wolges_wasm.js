@@ -2,13 +2,27 @@
 
 /**
  * @param {string} req_str
- * @returns {Promise<any>}
+ * @returns {string}
  */
 export function analyze(req_str) {
-    const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-    const len0 = WASM_VECTOR_LEN;
-    const ret = wasm.analyze(ptr0, len0);
-    return ret;
+    let deferred3_0;
+    let deferred3_1;
+    try {
+        const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.analyze(ptr0, len0);
+        var ptr2 = ret[0];
+        var len2 = ret[1];
+        if (ret[3]) {
+            ptr2 = 0; len2 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred3_0 = ptr2;
+        deferred3_1 = len2;
+        return getStringFromWasm0(ptr2, len2);
+    } finally {
+        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
+    }
 }
 
 export function do_this_on_startup() {
@@ -23,7 +37,10 @@ export function evict_klv(key) {
     const ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
     const ret = wasm.evict_klv(ptr0, len0);
-    return ret !== 0;
+    if (ret[2]) {
+        throw takeFromExternrefTable0(ret[1]);
+    }
+    return ret[0] !== 0;
 }
 
 /**
@@ -34,86 +51,270 @@ export function evict_kwg(key) {
     const ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
     const ret = wasm.evict_kwg(ptr0, len0);
-    return ret !== 0;
+    if (ret[2]) {
+        throw takeFromExternrefTable0(ret[1]);
+    }
+    return ret[0] !== 0;
 }
 
 /**
  * @param {string} req_str
- * @returns {any}
+ * @returns {string}
+ */
+export function hooks(req_str) {
+    let deferred3_0;
+    let deferred3_1;
+    try {
+        const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.hooks(ptr0, len0);
+        var ptr2 = ret[0];
+        var len2 = ret[1];
+        if (ret[3]) {
+            ptr2 = 0; len2 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred3_0 = ptr2;
+        deferred3_1 = len2;
+        return getStringFromWasm0(ptr2, len2);
+    } finally {
+        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
+    }
+}
+
+/**
+ * @param {string} req_str
+ * @returns {string}
  */
 export function play_score(req_str) {
+    let deferred3_0;
+    let deferred3_1;
+    try {
+        const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.play_score(ptr0, len0);
+        var ptr2 = ret[0];
+        var len2 = ret[1];
+        if (ret[3]) {
+            ptr2 = 0; len2 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred3_0 = ptr2;
+        deferred3_1 = len2;
+        return getStringFromWasm0(ptr2, len2);
+    } finally {
+        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
+    }
+}
+
+/**
+ * @param {string} key
+ * @param {Uint8Array} value
+ */
+export function precache_kblv2(key, value) {
+    const ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.precache_kblv2(ptr0, len0, value);
+    if (ret[1]) {
+        throw takeFromExternrefTable0(ret[0]);
+    }
+}
+
+/**
+ * @param {string} key
+ * @param {Uint8Array} value
+ */
+export function precache_kbwg(key, value) {
+    const ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.precache_kbwg(ptr0, len0, value);
+    if (ret[1]) {
+        throw takeFromExternrefTable0(ret[0]);
+    }
+}
+
+/**
+ * @param {string} key
+ * @param {Uint8Array} value
+ */
+export function precache_klv(key, value) {
+    const ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.precache_klv(ptr0, len0, value);
+    if (ret[1]) {
+        throw takeFromExternrefTable0(ret[0]);
+    }
+}
+
+/**
+ * @param {string} key
+ * @param {Uint8Array} value
+ */
+export function precache_kwg(key, value) {
+    const ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.precache_kwg(ptr0, len0, value);
+    if (ret[1]) {
+        throw takeFromExternrefTable0(ret[0]);
+    }
+}
+
+/**
+ * @param {number} sim
+ * @param {string} plays_str
+ * @returns {string}
+ */
+export function sim_add(sim, plays_str) {
+    let deferred4_0;
+    let deferred4_1;
+    try {
+        const val2 = +sim;
+        const ptr0 = passStringToWasm0(plays_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.sim_add(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
+    }
+}
+
+/**
+ * @param {number} sim
+ */
+export function sim_free(sim) {
+    const ret = wasm.sim_free(sim);
+    if (ret[1]) {
+        throw takeFromExternrefTable0(ret[0]);
+    }
+}
+
+/**
+ * @param {string} req_str
+ * @returns {number}
+ */
+export function sim_new(req_str) {
     const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
-    const ret = wasm.play_score(ptr0, len0);
+    const ret = wasm.sim_new(ptr0, len0);
     if (ret[2]) {
         throw takeFromExternrefTable0(ret[1]);
     }
-    return takeFromExternrefTable0(ret[0]);
+    return ret[0] >>> 0;
 }
 
 /**
- * @param {string} key
- * @param {Uint8Array | number[]} value
+ * @param {number} sim
+ * @param {string} plays_str
+ * @returns {string}
  */
-export function precache_kbwg(key, value) {
-    let ptr0, len0, ptr1, len1;
+export function sim_pause(sim, plays_str) {
+    let deferred4_0;
+    let deferred4_1;
     try {
-        ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        len0 = WASM_VECTOR_LEN;
-        ptr1 = passArray8ToWasm0(value, wasm.__wbindgen_malloc);
-        len1 = WASM_VECTOR_LEN;
-    } catch (e) {
-        if (ptr1) { wasm.__wbindgen_free(ptr1, len1 * 1, 1); }
-        if (ptr0) { wasm.__wbindgen_free(ptr0, len0 * 1, 1); }
-        throw e;
-    }
-    const ret = wasm.precache_kbwg(ptr0, len0, ptr1, len1);
-    if (ret[1]) {
-        throw takeFromExternrefTable0(ret[0]);
-    }
-}
-
-/**
- * @param {string} key
- * @param {Uint8Array | number[]} value
- */
-export function precache_klv(key, value) {
-    let ptr0, len0, ptr1, len1;
-    try {
-        ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        len0 = WASM_VECTOR_LEN;
-        ptr1 = passArray8ToWasm0(value, wasm.__wbindgen_malloc);
-        len1 = WASM_VECTOR_LEN;
-    } catch (e) {
-        if (ptr1) { wasm.__wbindgen_free(ptr1, len1 * 1, 1); }
-        if (ptr0) { wasm.__wbindgen_free(ptr0, len0 * 1, 1); }
-        throw e;
-    }
-    const ret = wasm.precache_klv(ptr0, len0, ptr1, len1);
-    if (ret[1]) {
-        throw takeFromExternrefTable0(ret[0]);
+        const val2 = +sim;
+        const ptr0 = passStringToWasm0(plays_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.sim_pause(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
     }
 }
 
 /**
- * @param {string} key
- * @param {Uint8Array | number[]} value
+ * @param {number} sim
+ * @param {string} plays_str
+ * @returns {string}
  */
-export function precache_kwg(key, value) {
-    let ptr0, len0, ptr1, len1;
+export function sim_remove(sim, plays_str) {
+    let deferred4_0;
+    let deferred4_1;
     try {
-        ptr0 = passStringToWasm0(key, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
-        len0 = WASM_VECTOR_LEN;
-        ptr1 = passArray8ToWasm0(value, wasm.__wbindgen_malloc);
-        len1 = WASM_VECTOR_LEN;
-    } catch (e) {
-        if (ptr1) { wasm.__wbindgen_free(ptr1, len1 * 1, 1); }
-        if (ptr0) { wasm.__wbindgen_free(ptr0, len0 * 1, 1); }
-        throw e;
+        const val2 = +sim;
+        const ptr0 = passStringToWasm0(plays_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.sim_remove(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
     }
-    const ret = wasm.precache_kwg(ptr0, len0, ptr1, len1);
-    if (ret[1]) {
-        throw takeFromExternrefTable0(ret[0]);
+}
+
+/**
+ * @param {number} sim
+ * @param {string} plays_str
+ * @returns {string}
+ */
+export function sim_resume(sim, plays_str) {
+    let deferred4_0;
+    let deferred4_1;
+    try {
+        const val2 = +sim;
+        const ptr0 = passStringToWasm0(plays_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.sim_resume(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
+    }
+}
+
+/**
+ * @param {number} sim
+ * @param {string} req_str
+ * @returns {string}
+ */
+export function sim_step(sim, req_str) {
+    let deferred4_0;
+    let deferred4_1;
+    try {
+        const val2 = +sim;
+        const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.sim_step(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
     }
 }
 
@@ -135,31 +336,12 @@ export function version() {
 function __wbg_get_imports() {
     const import0 = {
         __proto__: null,
-        __wbg_Error_208446807d0d1e30: function(arg0, arg1) {
-            const ret = Error(getStringFromWasm0(arg0, arg1));
-            return ret;
-        },
-        __wbg___wbindgen_is_function_741ff2bb612836f5: function(arg0) {
-            const ret = typeof(arg0) === 'function';
-            return ret;
-        },
-        __wbg___wbindgen_is_undefined_be5b34249ff1fc15: function(arg0) {
-            const ret = arg0 === undefined;
-            return ret;
-        },
         __wbg___wbindgen_rethrow_d953c34c2e20677f: function(arg0) {
             throw arg0;
         },
         __wbg___wbindgen_throw_4c88d8bf264fd984: function(arg0, arg1) {
             throw new Error(getStringFromWasm0(arg0, arg1));
         },
-        __wbg__wbg_cb_unref_09736879a3f67559: function(arg0) {
-            arg0._wbg_cb_unref();
-        },
-        __wbg_call_a410eb4b59ed5965: function() { return handleError(function (arg0, arg1, arg2) {
-            const ret = arg0.call(arg1, arg2);
-            return ret;
-        }, arguments); },
         __wbg_error_757e9472f8410341: function(arg0, arg1) {
             let deferred0_0;
             let deferred0_1;
@@ -171,38 +353,37 @@ function __wbg_get_imports() {
                 wasm.__wbindgen_free(deferred0_0, deferred0_1, 1);
             }
         },
+        __wbg_getRandomValues_8b6f1f663e6f188d: function() { return handleError(function (arg0, arg1) {
+            globalThis.crypto.getRandomValues(getArrayU8FromWasm0(arg0, arg1));
+        }, arguments); },
+        __wbg_instanceof_Uint8Array_d7aeb0dcb3108fea: function(arg0) {
+            let result;
+            try {
+                result = arg0 instanceof Uint8Array;
+            } catch (_) {
+                result = false;
+            }
+            const ret = result;
+            return ret;
+        },
+        __wbg_length_186163212ffe79c3: function(arg0) {
+            const ret = arg0.length;
+            return ret;
+        },
         __wbg_new_bb74001155cb8ca8: function() {
             const ret = new Error();
             return ret;
         },
-        __wbg_new_typed_e09da9dae6ee5935: function(arg0, arg1) {
-            try {
-                var state0 = {a: arg0, b: arg1};
-                var cb0 = (arg0, arg1) => {
-                    const a = state0.a;
-                    state0.a = 0;
-                    try {
-                        return wasm_bindgen_939c2e2f4e1d7475___convert__closures_____invoke___js_sys_f40063736ff5c153___Function_fn_wasm_bindgen_939c2e2f4e1d7475___JsValue_____wasm_bindgen_939c2e2f4e1d7475___sys__Undefined___js_sys_f40063736ff5c153___Function_fn_wasm_bindgen_939c2e2f4e1d7475___JsValue_____wasm_bindgen_939c2e2f4e1d7475___sys__Undefined_______true_(a, state0.b, arg0, arg1);
-                    } finally {
-                        state0.a = a;
-                    }
-                };
-                const ret = new Promise(cb0);
-                return ret;
-            } finally {
-                state0.a = 0;
-            }
-        },
-        __wbg_queueMicrotask_1e8503a8a690f0a3: function(arg0) {
-            const ret = arg0.queueMicrotask;
+        __wbg_now_463ac581d2fc7ea3: function() {
+            const ret = Date.now();
             return ret;
         },
-        __wbg_queueMicrotask_4a1a4d8dd332373b: function(arg0) {
-            queueMicrotask(arg0);
-        },
-        __wbg_resolve_dbf78ab4942478b0: function(arg0) {
-            const ret = Promise.resolve(arg0);
+        __wbg_now_c8c88c8d84e653e7: function() { return handleError(function () {
+            const ret = performance.now();
             return ret;
+        }, arguments); },
+        __wbg_prototypesetcall_13162965d1fe7aa3: function(arg0, arg1, arg2) {
+            Uint8Array.prototype.set.call(getArrayU8FromWasm0(arg0, arg1), arg2);
         },
         __wbg_stack_575c4e0918581b9c: function(arg0, arg1) {
             const ret = arg1.stack;
@@ -211,36 +392,11 @@ function __wbg_get_imports() {
             getDataViewMemory0().setInt32((arg0 >>> 0) + 4 * 1, len1, true);
             getDataViewMemory0().setInt32((arg0 >>> 0) + 4 * 0, ptr1, true);
         },
-        __wbg_static_accessor_GLOBAL_THIS_003ee833af9699fc: function() {
-            const ret = typeof globalThis === 'undefined' ? undefined : globalThis;
-            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
-        },
-        __wbg_static_accessor_GLOBAL_e4293fb22cbe77da: function() {
-            const ret = typeof global === 'undefined' ? undefined : global;
-            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
-        },
-        __wbg_static_accessor_SELF_53bb20457401453d: function() {
-            const ret = typeof self === 'undefined' ? undefined : self;
-            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
-        },
-        __wbg_static_accessor_WINDOW_b5e0810bfecb7feb: function() {
-            const ret = typeof window === 'undefined' ? undefined : window;
-            return isLikeNone(ret) ? 0 : addToExternrefTable0(ret);
-        },
-        __wbg_then_656f253a5dd7d8ea: function(arg0, arg1, arg2) {
-            const ret = arg0.then(arg1, arg2);
-            return ret;
-        },
-        __wbg_then_e3f7f2d365708be8: function(arg0, arg1) {
-            const ret = arg0.then(arg1);
+        __wbg_subarray_58f388a9247ac0bb: function(arg0, arg1, arg2) {
+            const ret = arg0.subarray(arg1 >>> 0, arg2 >>> 0);
             return ret;
         },
         __wbindgen_generic_0000000000000001: function(arg0, arg1) {
-            // Cast intrinsic for `Closure(Closure { owned: true, function: Function { arguments: [Externref], shim_idx: 23, ret: Result(Unit), inner_ret: Some(Result(Unit)) }, mutable: true }) -> Externref`.
-            const ret = makeMutClosure(arg0, arg1, wasm_bindgen_939c2e2f4e1d7475___convert__closures_____invoke___wasm_bindgen_939c2e2f4e1d7475___JsValue__core_37ee0ce0c4cd57d5___result__Result_____wasm_bindgen_939c2e2f4e1d7475___JsError___true_);
-            return ret;
-        },
-        __wbindgen_generic_0000000000000002: function(arg0, arg1) {
             // Cast intrinsic for `Ref(String) -> Externref`.
             const ret = getStringFromWasm0(arg0, arg1);
             return ret;
@@ -260,26 +416,16 @@ function __wbg_get_imports() {
     };
 }
 
-function wasm_bindgen_939c2e2f4e1d7475___convert__closures_____invoke___wasm_bindgen_939c2e2f4e1d7475___JsValue__core_37ee0ce0c4cd57d5___result__Result_____wasm_bindgen_939c2e2f4e1d7475___JsError___true_(arg0, arg1, arg2) {
-    const ret = wasm.wasm_bindgen_939c2e2f4e1d7475___convert__closures_____invoke___wasm_bindgen_939c2e2f4e1d7475___JsValue__core_37ee0ce0c4cd57d5___result__Result_____wasm_bindgen_939c2e2f4e1d7475___JsError___true_(arg0, arg1, arg2);
-    if (ret[1]) {
-        throw takeFromExternrefTable0(ret[0]);
-    }
-}
-
-function wasm_bindgen_939c2e2f4e1d7475___convert__closures_____invoke___js_sys_f40063736ff5c153___Function_fn_wasm_bindgen_939c2e2f4e1d7475___JsValue_____wasm_bindgen_939c2e2f4e1d7475___sys__Undefined___js_sys_f40063736ff5c153___Function_fn_wasm_bindgen_939c2e2f4e1d7475___JsValue_____wasm_bindgen_939c2e2f4e1d7475___sys__Undefined_______true_(arg0, arg1, arg2, arg3) {
-    wasm.wasm_bindgen_939c2e2f4e1d7475___convert__closures_____invoke___js_sys_f40063736ff5c153___Function_fn_wasm_bindgen_939c2e2f4e1d7475___JsValue_____wasm_bindgen_939c2e2f4e1d7475___sys__Undefined___js_sys_f40063736ff5c153___Function_fn_wasm_bindgen_939c2e2f4e1d7475___JsValue_____wasm_bindgen_939c2e2f4e1d7475___sys__Undefined_______true_(arg0, arg1, arg2, arg3);
-}
-
 function addToExternrefTable0(obj) {
     const idx = wasm.__externref_table_alloc();
     wasm.__wbindgen_externrefs.set(idx, obj);
     return idx;
 }
 
-const CLOSURE_DTORS = (typeof FinalizationRegistry === 'undefined')
-    ? { register: () => {}, unregister: () => {} }
-    : new FinalizationRegistry(state => wasm.__wbindgen_destroy_closure(state.a, state.b));
+function getArrayU8FromWasm0(ptr, len) {
+    ptr = ptr >>> 0;
+    return getUint8ArrayMemory0().subarray(ptr / 1, ptr / 1 + len);
+}
 
 let cachedDataViewMemory0 = null;
 function getDataViewMemory0() {
@@ -309,45 +455,6 @@ function handleError(f, args) {
         const idx = addToExternrefTable0(e);
         wasm.__wbindgen_exn_store(idx);
     }
-}
-
-function isLikeNone(x) {
-    return x === undefined || x === null;
-}
-
-function makeMutClosure(arg0, arg1, f) {
-    const state = { a: arg0, b: arg1, cnt: 1 };
-    const real = (...args) => {
-
-        // First up with a closure we increment the internal reference
-        // count. This ensures that the Rust closure environment won't
-        // be deallocated while we're invoking it.
-        state.cnt++;
-        const a = state.a;
-        state.a = 0;
-        try {
-            return f(a, state.b, ...args);
-        } finally {
-            state.a = a;
-            real._wbg_cb_unref();
-        }
-    };
-    real._wbg_cb_unref = () => {
-        if (--state.cnt === 0) {
-            wasm.__wbindgen_destroy_closure(state.a, state.b);
-            state.a = 0;
-            CLOSURE_DTORS.unregister(state);
-        }
-    };
-    CLOSURE_DTORS.register(real, state, state);
-    return real;
-}
-
-function passArray8ToWasm0(arg, malloc) {
-    const ptr = malloc(arg.length * 1, 1) >>> 0;
-    getUint8ArrayMemory0().set(arg, ptr / 1);
-    WASM_VECTOR_LEN = arg.length;
-    return ptr;
 }
 
 function passStringToWasm0(arg, malloc, realloc) {
