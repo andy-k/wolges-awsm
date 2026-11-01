@@ -123,9 +123,10 @@ export const makeLexicons = (idleMs: number) => {
 
   // Runs use with what the request body names loaded and held. The loads are
   // awaited one after the other, so at most one file's bytes are ever live.
+  // use may answer at once or with a promise: the wasm's calls answer at once.
   const withRequested = async <T>(
     body: string,
-    use: () => Promise<T>,
+    use: () => T | Promise<T>,
   ): Promise<T> => {
     let req;
     try {
