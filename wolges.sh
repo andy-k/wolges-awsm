@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 if [ "$1" = "--solve" -a "$#" -ge 2 ]; then
   curl --fail-with-body 'http://localhost:4500/analyze' -d "$2"
+elif [ "$1" = "--endgame" -a "$#" -ge 2 ]; then
+  curl --fail-with-body 'http://localhost:4500/endgame' -d "$2"
 elif [ "$1" = "--hooks" -a "$#" -ge 2 ]; then
   curl --fail-with-body 'http://localhost:4500/hooks' -d "$2"
 elif [ "$1" = "--play-score" -a "$#" -ge 2 ]; then
   curl --fail-with-body 'http://localhost:4500/play-score' -d "$2"
 else
   echo "usage: $0 --solve '{...}'" >&2
+  echo "       $0 --endgame '{...}'" >&2
   echo "       $0 --hooks '{...}'" >&2
   echo "       $0 --play-score '{...}'" >&2
   exit 2

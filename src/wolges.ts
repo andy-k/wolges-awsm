@@ -1,5 +1,8 @@
 import init, {
   analyze,
+  endgame_free,
+  endgame_new,
+  endgame_step,
   hooks,
   play_score,
   version,
@@ -23,10 +26,24 @@ const awsmVersion =
     : "unknown";
 
 const jsonResponseHeaders = { headers: { "Content-Type": "application/json" } };
+// A whole endgame in one request: the position as endgame_new takes it, and
+// "ms", how long (in ms) its one step may solve for. The answer is that step's;
+// the endgame is freed whatever happens.
+const endgame = (body: string): string => {
+  const { ms } = JSON.parse(body);
+  const handle = endgame_new(body);
+  try {
+    return endgame_step(handle, JSON.stringify({ ms }));
+  } finally {
+    endgame_free(handle);
+  }
+};
 // Each takes the request's JSON text and answers JSON text, naming its tables as
-// analyze does (hooks names no leave), so the same loading serves all three.
+// analyze does (neither endgame nor hooks names a leave), so the same loading
+// serves them all.
 const postCalls: Record<string, (body: string) => string> = {
   "/analyze": analyze,
+  "/endgame": endgame,
   "/hooks": hooks,
   "/play-score": play_score,
 };
@@ -71,6 +88,7 @@ const handle = async (req: Request): Promise<Response> => {
 // runs its own copy of the logic is a check on the copy.
 //
 //   deno run --allow-read src/wolges.ts analyze sample-analyze.json
+//   deno run --allow-read src/wolges.ts endgame sample-endgame.json
 //   deno run --allow-read src/wolges.ts hooks sample-hooks.json
 //   deno run --allow-read src/wolges.ts play-score sample-play-score.json
 //   deno run --allow-read src/wolges.ts ping
