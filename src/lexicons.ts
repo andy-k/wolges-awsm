@@ -30,11 +30,30 @@ const candidates = (
   ];
 };
 
+// The longest wait setTimeout takes (a longer one fires at once), so a longer
+// idle time is waited out in turns of at most this.
+export const MAX_TIMEOUT_MS = 2 ** 31 - 1;
+
+// An idle time as --idle-ms gives it: a number of ms, at least 0, or never
+// (Infinity, kept for good).
+export const parseIdleMs = (value: string): number => {
+  if (value === "never") return Infinity;
+  const ms = value.trim() === "" ? NaN : Number(value);
+  if (!(ms >= 0) || ms === Infinity) {
+    throw new Error(
+      `--idle-ms: a number of ms, at least 0, or never, found ${
+        JSON.stringify(value)
+      }`,
+    );
+  }
+  return ms;
+};
+
 // The word graphs and leave tables requests name, loaded on first use and
-// handed back to the wasm once no request has used them for idleMs. A request
-// holds what it names from before loading until it is answered, so a table
-// cannot go between being loaded and being used.
-export const makeLexicons = (idleMs: number) => {
+// handed back to the wasm once no request has used them for idleMs (never, when
+// idleMs is Infinity). A request holds what it names from before loading until
+// it is answered, so a table cannot go between being loaded and being used.
+export const makeLexicons = (idleMs: number, maxTimeoutMs = MAX_TIMEOUT_MS) => {
   // Names that have been settled, whether or not a file was found for them, so
   // a caller asking again for something that is not there costs one failed
   // open rather than one per request.
@@ -104,6 +123,22 @@ export const makeLexicons = (idleMs: number) => {
     }
   };
 
+  // Waits out what is left of the idle time, at most maxTimeoutMs a turn, then
+  // evicts the table unless a request holds it.
+  const arm = (key: string, left: number) => {
+    const timer = setTimeout(() => {
+      if (left > maxTimeoutMs) {
+        arm(key, left - maxTimeoutMs);
+        return;
+      }
+      timers.delete(key);
+      if (!holders.has(key)) evict(key);
+    }, Math.min(left, maxTimeoutMs));
+    // An idle table never keeps the process alive by itself.
+    Deno.unrefTimer(timer);
+    timers.set(key, timer);
+  };
+
   const release = (key: string) => {
     const left = (holders.get(key) ?? 1) - 1;
     if (left > 0) {
@@ -111,14 +146,8 @@ export const makeLexicons = (idleMs: number) => {
       return;
     }
     holders.delete(key);
-    if (!resident.has(key)) return;
-    const timer = setTimeout(() => {
-      timers.delete(key);
-      if (!holders.has(key)) evict(key);
-    }, idleMs);
-    // An idle table never keeps the process alive by itself.
-    Deno.unrefTimer(timer);
-    timers.set(key, timer);
+    if (!resident.has(key) || idleMs === Infinity) return;
+    arm(key, idleMs);
   };
 
   // Runs use with what the request body names loaded and held. The loads are

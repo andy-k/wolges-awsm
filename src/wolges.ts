@@ -7,14 +7,27 @@ import init, {
   play_score,
   version,
 } from "../pkg-web/wolges_wasm.js";
-import { makeLexicons } from "./lexicons.ts";
+import { makeLexicons, parseIdleMs } from "./lexicons.ts";
 
 await init();
 
-// How long a word graph or leave table stays loaded after the last request
-// that named it.
-const IDLE_MS = 10 * 60 * 1000;
-const lexicons = makeLexicons(IDLE_MS);
+// The settings among the arguments, each --name=value, and the rest: a request
+// to run once (runOnce), or none to serve. How long a word graph or leave table
+// stays loaded after the last request that named it: --idle-ms=<ms|never>, else
+// ten minutes.
+const IDLE_MS = "--idle-ms=";
+let idleMs = 10 * 60 * 1000;
+const request: string[] = [];
+for (const arg of Deno.args) {
+  if (arg.startsWith(IDLE_MS)) {
+    idleMs = parseIdleMs(arg.slice(IDLE_MS.length));
+  } else if (arg.startsWith("--")) {
+    throw new Error(`no such setting: ${arg} (there is --idle-ms=<ms|never>)`);
+  } else {
+    request.push(arg);
+  }
+}
+const lexicons = makeLexicons(idleMs);
 
 // The commits this service was built from: its own, as its image's builder
 // stamps it (run.sh, or the workflow that publishes the image), "unknown"
@@ -118,8 +131,8 @@ const runOnce = async (args: string[]): Promise<never> => {
   Deno.exit(res.status === 200 ? 0 : 1);
 };
 
-if (Deno.args.length) {
-  await runOnce(Deno.args);
+if (request.length) {
+  await runOnce(request);
 } else {
   Deno.serve({ port: 4500 }, handle);
 }

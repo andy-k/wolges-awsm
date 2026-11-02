@@ -7,4 +7,5 @@ run ["deno", "cache", "src/wolges.ts"]
 # the workflow that publishes the image); src/wolges.ts reports it at /version
 arg AWSM_VERSION=unknown
 env AWSM_VERSION=$AWSM_VERSION
+# a deployer may give src/wolges.ts --idle-ms=<ms|never> after it (README)
 cmd ["run", "--allow-read=data,pkg-web", "--allow-net=0.0.0.0:4500", "--allow-env=AWSM_VERSION", "src/wolges.ts"]

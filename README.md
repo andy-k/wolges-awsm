@@ -23,6 +23,10 @@ Released under the MIT license.
 
 Clone liwords at the same level as this repo.
 
+Give src/wolges.ts --idle-ms=<ms> for how long a lexicon may go unused
+before it is unloaded (ten minutes without it), or --idle-ms=never to keep
+each one loaded: `deno task serve --idle-ms=never`.
+
 ## GitHub Badge
 
 - [![Actions](https://github.com/andy-k/wolges-awsm/actions/workflows/actions.yml/badge.svg)](https://github.com/andy-k/wolges-awsm/actions/workflows/actions.yml)
