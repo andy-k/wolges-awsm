@@ -30,6 +30,57 @@ export function do_this_on_startup() {
 }
 
 /**
+ * @param {number} handle
+ */
+export function endgame_free(handle) {
+    const ret = wasm.endgame_free(handle);
+    if (ret[1]) {
+        throw takeFromExternrefTable0(ret[0]);
+    }
+}
+
+/**
+ * @param {string} req_str
+ * @returns {number}
+ */
+export function endgame_new(req_str) {
+    const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.endgame_new(ptr0, len0);
+    if (ret[2]) {
+        throw takeFromExternrefTable0(ret[1]);
+    }
+    return ret[0] >>> 0;
+}
+
+/**
+ * @param {number} handle
+ * @param {string} req_str
+ * @returns {string}
+ */
+export function endgame_step(handle, req_str) {
+    let deferred4_0;
+    let deferred4_1;
+    try {
+        const val2 = +handle;
+        const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.endgame_step(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
+    }
+}
+
+/**
  * @param {string} key
  * @returns {boolean}
  */

@@ -3,6 +3,9 @@
 export const memory: WebAssembly.Memory;
 export const analyze: (a: number, b: number) => [number, number, number, number];
 export const do_this_on_startup: () => void;
+export const endgame_free: (a: number) => [number, number];
+export const endgame_new: (a: number, b: number) => [number, number, number];
+export const endgame_step: (a: number, b: number, c: number) => [number, number, number, number];
 export const evict_klv: (a: number, b: number) => [number, number, number];
 export const evict_kwg: (a: number, b: number) => [number, number, number];
 export const hooks: (a: number, b: number) => [number, number, number, number];
