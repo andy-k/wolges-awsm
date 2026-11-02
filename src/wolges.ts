@@ -1,4 +1,9 @@
-import init, { analyze, play_score, version } from "../pkg-web/wolges_wasm.js";
+import init, {
+  analyze,
+  hooks,
+  play_score,
+  version,
+} from "../pkg-web/wolges_wasm.js";
 import { makeLexicons } from "./lexicons.ts";
 
 await init();
@@ -18,6 +23,13 @@ const awsmVersion =
     : "unknown";
 
 const jsonResponseHeaders = { headers: { "Content-Type": "application/json" } };
+// Each takes the request's JSON text and answers JSON text, naming its tables as
+// analyze does (hooks names no leave), so the same loading serves all three.
+const postCalls: Record<string, (body: string) => string> = {
+  "/analyze": analyze,
+  "/hooks": hooks,
+  "/play-score": play_score,
+};
 const pingResponseBody = JSON.stringify({ ok: true });
 const versionResponseBody = JSON.stringify({
   version: `wolges-awsm ${awsmVersion} ${version()}`,
@@ -34,19 +46,13 @@ const handle = async (req: Request): Promise<Response> => {
         }
         break;
       case "POST": {
-        const pathname = (new URL(req.url)).pathname;
-        switch (pathname) {
-          case "/analyze":
-          case "/play-score": {
-            const body = await req.text();
-            return new Response(
-              await lexicons.withRequested(
-                body,
-                () => (pathname === "/analyze" ? analyze : play_score)(body),
-              ),
-              jsonResponseHeaders,
-            );
-          }
+        const call = postCalls[(new URL(req.url)).pathname];
+        if (call) {
+          const body = await req.text();
+          return new Response(
+            await lexicons.withRequested(body, () => call(body)),
+            jsonResponseHeaders,
+          );
         }
         break;
       }
@@ -65,6 +71,7 @@ const handle = async (req: Request): Promise<Response> => {
 // runs its own copy of the logic is a check on the copy.
 //
 //   deno run --allow-read src/wolges.ts analyze sample-analyze.json
+//   deno run --allow-read src/wolges.ts hooks sample-hooks.json
 //   deno run --allow-read src/wolges.ts play-score sample-play-score.json
 //   deno run --allow-read src/wolges.ts ping
 //   deno run --allow-read src/wolges.ts version
