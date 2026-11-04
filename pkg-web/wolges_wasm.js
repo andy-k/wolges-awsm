@@ -137,6 +137,41 @@ export function hooks(req_str) {
  * @param {string} req_str
  * @returns {string}
  */
+export function infer(req_str) {
+    let deferred3_0;
+    let deferred3_1;
+    try {
+        const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.infer(ptr0, len0);
+        var ptr2 = ret[0];
+        var len2 = ret[1];
+        if (ret[3]) {
+            ptr2 = 0; len2 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred3_0 = ptr2;
+        deferred3_1 = len2;
+        return getStringFromWasm0(ptr2, len2);
+    } finally {
+        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
+    }
+}
+
+/**
+ * @param {number} handle
+ */
+export function infer_free(handle) {
+    const ret = wasm.infer_free(handle);
+    if (ret[1]) {
+        throw takeFromExternrefTable0(ret[0]);
+    }
+}
+
+/**
+ * @param {string} req_str
+ * @returns {string}
+ */
 export function play_score(req_str) {
     let deferred3_0;
     let deferred3_1;
@@ -347,6 +382,33 @@ export function sim_resume(sim, plays_str) {
  * @param {string} req_str
  * @returns {string}
  */
+export function sim_set(sim, req_str) {
+    let deferred4_0;
+    let deferred4_1;
+    try {
+        const val2 = +sim;
+        const ptr0 = passStringToWasm0(req_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.sim_set(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
+    }
+}
+
+/**
+ * @param {number} sim
+ * @param {string} req_str
+ * @returns {string}
+ */
 export function sim_step(sim, req_str) {
     let deferred4_0;
     let deferred4_1;
@@ -367,6 +429,19 @@ export function sim_step(sim, req_str) {
     } finally {
         wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
     }
+}
+
+/**
+ * @param {number} iterations
+ * @param {number} alpha
+ * @returns {number}
+ */
+export function stitched_z(iterations, alpha) {
+    const ret = wasm.stitched_z(iterations, alpha);
+    if (ret[2]) {
+        throw takeFromExternrefTable0(ret[1]);
+    }
+    return ret[0];
 }
 
 /**
