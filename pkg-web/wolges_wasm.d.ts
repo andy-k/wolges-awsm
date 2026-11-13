@@ -21,6 +21,8 @@ export function infer(req_str: string): string;
 
 export function infer_free(handle: number): void;
 
+export function memory_held(): number;
+
 export function play_score(req_str: string): string;
 
 export function precache_kblv2(key: string, value: Uint8Array): void;
@@ -49,6 +51,14 @@ export function sim_step(sim: number, req_str: string): string;
 
 export function stitched_z(iterations: number, alpha: number): number;
 
+export function threats(req_str: string): string;
+
+export function threats_free(threats: number): void;
+
+export function threats_new(req_str: string): number;
+
+export function threats_step(threats: number, req_str: string): string;
+
 export function version(): string;
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
@@ -65,6 +75,7 @@ export interface InitOutput {
     readonly hooks: (a: number, b: number) => [number, number, number, number];
     readonly infer: (a: number, b: number) => [number, number, number, number];
     readonly infer_free: (a: number) => [number, number];
+    readonly memory_held: () => number;
     readonly play_score: (a: number, b: number) => [number, number, number, number];
     readonly precache_kblv2: (a: number, b: number, c: any) => [number, number];
     readonly precache_kbwg: (a: number, b: number, c: any) => [number, number];
@@ -79,6 +90,10 @@ export interface InitOutput {
     readonly sim_set: (a: number, b: number, c: number) => [number, number, number, number];
     readonly sim_step: (a: number, b: number, c: number) => [number, number, number, number];
     readonly stitched_z: (a: number, b: number) => [number, number, number];
+    readonly threats: (a: number, b: number) => [number, number, number, number];
+    readonly threats_free: (a: number) => [number, number];
+    readonly threats_new: (a: number, b: number) => [number, number, number];
+    readonly threats_step: (a: number, b: number, c: number) => [number, number, number, number];
     readonly version: () => [number, number];
     readonly __wbindgen_free: (a: number, b: number, c: number) => void;
     readonly __wbindgen_exn_store: (a: number) => void;
