@@ -7,7 +7,7 @@ import init, {
   play_score,
   version,
 } from "../pkg-web/wolges_wasm.js";
-import { makeLexicons, parseIdleMs } from "./lexicons.ts";
+import { makeLexicons, parseIdleMs, type RequestFields } from "./lexicons.ts";
 
 await init();
 
@@ -42,11 +42,10 @@ const jsonResponseHeaders = { headers: { "Content-Type": "application/json" } };
 // A whole endgame in one request: the position as endgame_new takes it, and
 // "ms", how long (in ms) its one step may solve for. The answer is that step's;
 // the endgame is freed whatever happens.
-const endgame = (body: string): string => {
-  const { ms } = JSON.parse(body);
+const endgame = (body: string, req: RequestFields | undefined): string => {
   const handle = endgame_new(body);
   try {
-    return endgame_step(handle, JSON.stringify({ ms }));
+    return endgame_step(handle, JSON.stringify({ ms: req?.ms }));
   } finally {
     endgame_free(handle);
   }
@@ -54,7 +53,10 @@ const endgame = (body: string): string => {
 // Each takes the request's JSON text and answers JSON text, naming its tables as
 // analyze does (neither endgame nor hooks names a leave), so the same loading
 // serves them all.
-const postCalls: Record<string, (body: string) => string> = {
+const postCalls: Record<
+  string,
+  (body: string, req: RequestFields | undefined) => string
+> = {
   "/analyze": analyze,
   "/endgame": endgame,
   "/hooks": hooks,
@@ -80,7 +82,7 @@ const handle = async (req: Request): Promise<Response> => {
         if (call) {
           const body = await req.text();
           return new Response(
-            await lexicons.withRequested(body, () => call(body)),
+            await lexicons.withRequested(body, (fields) => call(body, fields)),
             jsonResponseHeaders,
           );
         }

@@ -49,6 +49,12 @@ export const parseIdleMs = (value: string): number => {
   return ms;
 };
 
+export type RequestFields = {
+  lexicon?: unknown;
+  leave?: unknown;
+  ms?: unknown;
+};
+
 // The word graphs and leave tables requests name, loaded on first use and
 // handed back to the wasm once no request has used them for idleMs (never, when
 // idleMs is Infinity). A request holds what it names from before loading until
@@ -155,13 +161,13 @@ export const makeLexicons = (idleMs: number, maxTimeoutMs = MAX_TIMEOUT_MS) => {
   // use may answer at once or with a promise: the wasm's calls answer at once.
   const withRequested = async <T>(
     body: string,
-    use: () => T | Promise<T>,
+    use: (req: RequestFields | undefined) => T | Promise<T>,
   ): Promise<T> => {
-    let req;
+    let req: RequestFields | undefined;
     try {
       req = JSON.parse(body);
     } catch {
-      return await use(); // let the wasm report the malformed request
+      return await use(undefined); // let the wasm report the malformed request
     }
     const keys: [Kind, string][] = [];
     if (typeof req?.lexicon === "string") keys.push(["kwg", req.lexicon]);
@@ -169,7 +175,7 @@ export const makeLexicons = (idleMs: number, maxTimeoutMs = MAX_TIMEOUT_MS) => {
     for (const [kind, name] of keys) hold(`${kind}:${name}`);
     try {
       for (const [kind, name] of keys) await ensure(kind, name);
-      return await use();
+      return await use(req);
     } finally {
       for (const [kind, name] of keys) release(`${kind}:${name}`);
     }
