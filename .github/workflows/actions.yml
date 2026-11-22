@@ -1,16 +1,34 @@
 name: Create and publish a Docker image
 'on':
   push:
+  workflow_dispatch:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: "${{ github.repository }}"
 jobs:
   build-and-push-image:
     runs-on: ubuntu-26.04
+    timeout-minutes: 350
     permissions:
+      actions: read
       contents: read
       packages: write
     steps:
+    # a run made by hand publishes, so it first waits for every earlier run of
+    # this workflow to finish: an older commit's image never lands after it
+    - name: Wait for earlier runs
+      if: github.event_name == 'workflow_dispatch'
+      env:
+        GH_TOKEN: "${{ github.token }}"
+      run: |
+        for _ in $(seq 1 330); do
+          n=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/actions.yml/runs?per_page=100" \
+            --jq "[.workflow_runs[] | select(.id < $GITHUB_RUN_ID and .status != \"completed\")] | length")
+          [ "$n" = 0 ] && exit 0
+          sleep 60
+        done
+        echo "earlier runs of this workflow still unfinished after 330 minutes" >&2
+        exit 1
     - name: Checkout repository
       uses: actions/checkout@v7
     # the image is stamped with the commit it is built from, as wolges's release
@@ -21,7 +39,10 @@ jobs:
         printf 'stamp=%s-%s\n'
         "$(TZ=UTC0 git log -1 --format=%cd --date=format-local:%Y%m%dT%H%M%SZ)"
         "$(git rev-parse --short HEAD)" >>"$GITHUB_OUTPUT"
+    # every push builds the image; it goes to the registry only when this
+    # workflow is run by hand
     - name: Log in to the Container registry
+      if: github.event_name == 'workflow_dispatch'
       uses: docker/login-action@v4
       with:
         registry: "${{ env.REGISTRY }}"
@@ -39,7 +60,7 @@ jobs:
       uses: docker/build-push-action@v7
       with:
         context: "."
-        push: true
+        push: "${{ github.event_name == 'workflow_dispatch' }}"
         tags: "${{ steps.meta.outputs.tags }}"
         labels: "${{ steps.meta.outputs.labels }}"
         build-args: "AWSM_VERSION=${{ steps.stamp.outputs.stamp }}"
