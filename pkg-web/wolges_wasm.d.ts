@@ -11,6 +11,8 @@ export function endgame_free(handle: number): void;
 
 export function endgame_new(req_str: string): number;
 
+export function endgame_prioritize(handle: number, ids: Uint32Array | number[]): void;
+
 export function endgame_step(handle: number, req_str: string): string;
 
 export function evict_klv(key: string): boolean;
@@ -41,7 +43,17 @@ export function precache_kwg(key: string, value: Uint8Array): void;
 
 export function prune_pays(req_str: string): boolean;
 
+export function shortlist_add(handle: number, plays_str: string): Uint32Array;
+
+export function shortlist_free(handle: number): void;
+
+export function shortlist_new(req_str: string): number;
+
+export function shortlist_plays(handle: number): string;
+
 export function sim_add(sim: number, plays_str: string): string;
+
+export function sim_add_ids(sim: number, ids: Uint32Array | number[]): Uint8Array;
 
 export function sim_free(sim: number): void;
 
@@ -49,9 +61,15 @@ export function sim_new(req_str: string): number;
 
 export function sim_pause(sim: number, plays_str: string): string;
 
+export function sim_pause_ids(sim: number, ids: Uint32Array | number[]): Uint8Array;
+
 export function sim_remove(sim: number, plays_str: string): string;
 
+export function sim_remove_ids(sim: number, ids: Uint32Array | number[]): Uint8Array;
+
 export function sim_resume(sim: number, plays_str: string): string;
+
+export function sim_resume_ids(sim: number, ids: Uint32Array | number[]): Uint8Array;
 
 export function sim_set(sim: number, req_str: string): string;
 
@@ -78,6 +96,7 @@ export interface InitOutput {
     readonly do_this_on_startup: () => void;
     readonly endgame_free: (a: number) => [number, number];
     readonly endgame_new: (a: number, b: number) => [number, number, number];
+    readonly endgame_prioritize: (a: number, b: number, c: number) => [number, number];
     readonly endgame_step: (a: number, b: number, c: number) => [number, number, number, number];
     readonly evict_klv: (a: number, b: number) => [number, number, number];
     readonly evict_kwg: (a: number, b: number) => [number, number, number];
@@ -93,12 +112,20 @@ export interface InitOutput {
     readonly precache_klv: (a: number, b: number, c: any) => [number, number];
     readonly precache_kwg: (a: number, b: number, c: any) => [number, number];
     readonly prune_pays: (a: number, b: number) => [number, number, number];
+    readonly shortlist_add: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly shortlist_free: (a: number) => [number, number];
+    readonly shortlist_new: (a: number, b: number) => [number, number, number];
+    readonly shortlist_plays: (a: number) => [number, number, number, number];
     readonly sim_add: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly sim_add_ids: (a: number, b: number, c: number) => [number, number, number, number];
     readonly sim_free: (a: number) => [number, number];
     readonly sim_new: (a: number, b: number) => [number, number, number];
     readonly sim_pause: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly sim_pause_ids: (a: number, b: number, c: number) => [number, number, number, number];
     readonly sim_remove: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly sim_remove_ids: (a: number, b: number, c: number) => [number, number, number, number];
     readonly sim_resume: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly sim_resume_ids: (a: number, b: number, c: number) => [number, number, number, number];
     readonly sim_set: (a: number, b: number, c: number) => [number, number, number, number];
     readonly sim_step: (a: number, b: number, c: number) => [number, number, number, number];
     readonly stitched_z: (a: number, b: number) => [number, number, number];
