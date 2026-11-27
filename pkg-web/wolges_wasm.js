@@ -47,6 +47,51 @@ export function do_this_on_startup() {
 
 /**
  * @param {number} handle
+ * @param {string} plays_str
+ * @returns {string}
+ */
+export function endgame_add(handle, plays_str) {
+    let deferred4_0;
+    let deferred4_1;
+    try {
+        const val2 = +handle;
+        const ptr0 = passStringToWasm0(plays_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.endgame_add(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
+    }
+}
+
+/**
+ * @param {number} handle
+ * @param {Uint32Array | number[]} ids
+ * @returns {Uint8Array}
+ */
+export function endgame_add_ids(handle, ids) {
+    const val2 = +handle;
+    const ptr0 = passArray32ToWasm0(ids, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.endgame_add_ids(val2, ptr0, len0);
+    if (ret[3]) {
+        throw takeFromExternrefTable0(ret[2]);
+    }
+    var v3 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+    wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+    return v3;
+}
+
+/**
+ * @param {number} handle
  */
 export function endgame_free(handle) {
     const ret = wasm.endgame_free(handle);
@@ -71,6 +116,51 @@ export function endgame_new(req_str) {
 
 /**
  * @param {number} handle
+ * @param {string} plays_str
+ * @returns {string}
+ */
+export function endgame_pause(handle, plays_str) {
+    let deferred4_0;
+    let deferred4_1;
+    try {
+        const val2 = +handle;
+        const ptr0 = passStringToWasm0(plays_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.endgame_pause(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
+    }
+}
+
+/**
+ * @param {number} handle
+ * @param {Uint32Array | number[]} ids
+ * @returns {Uint8Array}
+ */
+export function endgame_pause_ids(handle, ids) {
+    const val2 = +handle;
+    const ptr0 = passArray32ToWasm0(ids, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.endgame_pause_ids(val2, ptr0, len0);
+    if (ret[3]) {
+        throw takeFromExternrefTable0(ret[2]);
+    }
+    var v3 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+    wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+    return v3;
+}
+
+/**
+ * @param {number} handle
  * @param {Uint32Array | number[]} ids
  */
 export function endgame_prioritize(handle, ids) {
@@ -81,6 +171,96 @@ export function endgame_prioritize(handle, ids) {
     if (ret[1]) {
         throw takeFromExternrefTable0(ret[0]);
     }
+}
+
+/**
+ * @param {number} handle
+ * @param {string} plays_str
+ * @returns {string}
+ */
+export function endgame_remove(handle, plays_str) {
+    let deferred4_0;
+    let deferred4_1;
+    try {
+        const val2 = +handle;
+        const ptr0 = passStringToWasm0(plays_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.endgame_remove(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
+    }
+}
+
+/**
+ * @param {number} handle
+ * @param {Uint32Array | number[]} ids
+ * @returns {Uint8Array}
+ */
+export function endgame_remove_ids(handle, ids) {
+    const val2 = +handle;
+    const ptr0 = passArray32ToWasm0(ids, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.endgame_remove_ids(val2, ptr0, len0);
+    if (ret[3]) {
+        throw takeFromExternrefTable0(ret[2]);
+    }
+    var v3 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+    wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+    return v3;
+}
+
+/**
+ * @param {number} handle
+ * @param {string} plays_str
+ * @returns {string}
+ */
+export function endgame_resume(handle, plays_str) {
+    let deferred4_0;
+    let deferred4_1;
+    try {
+        const val2 = +handle;
+        const ptr0 = passStringToWasm0(plays_str, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.endgame_resume(val2, ptr0, len0);
+        var ptr3 = ret[0];
+        var len3 = ret[1];
+        if (ret[3]) {
+            ptr3 = 0; len3 = 0;
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        deferred4_0 = ptr3;
+        deferred4_1 = len3;
+        return getStringFromWasm0(ptr3, len3);
+    } finally {
+        wasm.__wbindgen_free(deferred4_0, deferred4_1, 1);
+    }
+}
+
+/**
+ * @param {number} handle
+ * @param {Uint32Array | number[]} ids
+ * @returns {Uint8Array}
+ */
+export function endgame_resume_ids(handle, ids) {
+    const val2 = +handle;
+    const ptr0 = passArray32ToWasm0(ids, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.endgame_resume_ids(val2, ptr0, len0);
+    if (ret[3]) {
+        throw takeFromExternrefTable0(ret[2]);
+    }
+    var v3 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+    wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+    return v3;
 }
 
 /**

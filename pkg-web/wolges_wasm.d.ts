@@ -7,11 +7,27 @@ export function build_kbwg(req_str: string): Uint8Array;
 
 export function do_this_on_startup(): void;
 
+export function endgame_add(handle: number, plays_str: string): string;
+
+export function endgame_add_ids(handle: number, ids: Uint32Array | number[]): Uint8Array;
+
 export function endgame_free(handle: number): void;
 
 export function endgame_new(req_str: string): number;
 
+export function endgame_pause(handle: number, plays_str: string): string;
+
+export function endgame_pause_ids(handle: number, ids: Uint32Array | number[]): Uint8Array;
+
 export function endgame_prioritize(handle: number, ids: Uint32Array | number[]): void;
+
+export function endgame_remove(handle: number, plays_str: string): string;
+
+export function endgame_remove_ids(handle: number, ids: Uint32Array | number[]): Uint8Array;
+
+export function endgame_resume(handle: number, plays_str: string): string;
+
+export function endgame_resume_ids(handle: number, ids: Uint32Array | number[]): Uint8Array;
 
 export function endgame_step(handle: number, req_str: string): string;
 
@@ -94,9 +110,17 @@ export interface InitOutput {
     readonly analyze: (a: number, b: number) => [number, number, number, number];
     readonly build_kbwg: (a: number, b: number) => [number, number, number, number];
     readonly do_this_on_startup: () => void;
+    readonly endgame_add: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly endgame_add_ids: (a: number, b: number, c: number) => [number, number, number, number];
     readonly endgame_free: (a: number) => [number, number];
     readonly endgame_new: (a: number, b: number) => [number, number, number];
+    readonly endgame_pause: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly endgame_pause_ids: (a: number, b: number, c: number) => [number, number, number, number];
     readonly endgame_prioritize: (a: number, b: number, c: number) => [number, number];
+    readonly endgame_remove: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly endgame_remove_ids: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly endgame_resume: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly endgame_resume_ids: (a: number, b: number, c: number) => [number, number, number, number];
     readonly endgame_step: (a: number, b: number, c: number) => [number, number, number, number];
     readonly evict_klv: (a: number, b: number) => [number, number, number];
     readonly evict_kwg: (a: number, b: number) => [number, number, number];
